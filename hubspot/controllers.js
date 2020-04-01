@@ -254,8 +254,7 @@ const formatContact = contact => {
     };
 
     // Get the name of the institution from the hostname of the last_url param
-    const institution =
-      INSTITUTIONS[helpers.getHostName(hs_analytics_last_url.value)];
+    const institution = hs_analytics_last_url ? INSTITUTIONS[helpers.getHostName(hs_analytics_last_url.value)] : null;
 
     // Source Parameter
     let source = queryParams.utm_source;

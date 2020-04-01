@@ -3,7 +3,6 @@ const http = require("http");
 const https = require("https");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const session = require("cookie-session");
 const apolloServer = require("./apollo");
 const env = require("./env");
 const trelloRoutes = require("./trello/routes");
@@ -64,7 +63,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/static", express.static("static/"));
-app.use(session({ secret: env.PASSPORT_SECRET }));
+//app.use(session({ secret: env.PASSPORT_SECRET }));
 app.use(passport.initialize());
 
 // ====
