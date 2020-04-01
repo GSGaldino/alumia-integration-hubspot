@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "NODE_ENV=production && node index.js",
-    "start:dev": "export GOOGLE_APPLICATION_CREDENTIALS=/Users/bvodola/Projects/trello-export/server/static/ZapMaster-a5c70ebae786.json && export NODE_ENV=development && nodemon"
+    "start:dev": "NODE_ENV=development && nodemon"
   },
   "engines": {
     "node": "12.x"

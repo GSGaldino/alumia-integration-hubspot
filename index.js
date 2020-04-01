@@ -64,14 +64,14 @@ app.use((req, res, next) => {
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/static", express.static("static/"));
-app.use(session({ secret: env.PASSPORT_SECRET }));
-app.use(passport.initialize());
+//app.use(session({ secret: env.PASSPORT_SECRET }));
+//app.use(passport.initialize());
 
 // ====
 // Auth
 // ====
-require("./auth/strategies")(passport);
-app.use("/auth", require("./auth/routes")(passport));
+//require("./auth/strategies")(passport);
+//app.use("/auth", require("./auth/routes")(passport));
 
 // ==========
 // Trello API
