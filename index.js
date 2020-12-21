@@ -17,9 +17,9 @@ require("./google/sheets");
 // ==============
 const app = express();
 const port = env.PORT || 3000;
-const server = http.createServer(app);
+const server = http.createServer(app);/* 
 apolloServer.applyMiddleware({ app });
-app.use("/graphql", () => {});
+app.use("/graphql", () => {}); */
 
 // =====================
 // Keep Heroku App awake
@@ -97,11 +97,13 @@ if (app.settings.env === "production") {
 // ======
 // Server
 // ======
-mongo.connect(err => {
+/* mongo.connect(err => {
   if (err) console.error(err);
-  server.listen(port, () =>
-    console.log(`Listening on port ${port}, ${apolloServer.graphqlPath}`)
+  , ${apolloServer.graphqlPath}`)
   );
-});
+}); */
+
+server.listen(port, () =>
+    console.log(`Listening on port ${port}`))
 
 module.exports = app;
