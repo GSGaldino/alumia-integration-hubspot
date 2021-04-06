@@ -198,7 +198,8 @@ const formatContact = contact => {
   // Formatted contact initial template
   let formattedContact = {
     id: contact.vid,
-    hs_url: contact["profile-url"],
+    analytics_source: contact.properties.hs_analytics_source.value,
+    hs_url: `https://app.hubspot.com/contacts/6331207/contact/${contact.vid}`,
     addedAt: formattedDate(contact.addedAt)
   };
 
@@ -209,7 +210,6 @@ const formatContact = contact => {
     hs_analytics_first_referrer,
     hs_analytics_last_referrer,
     first_conversion_event_name,
-    hs_analytics_source_data_2
   } = contact.properties;
 
   // Get the form-submissions value needed for the report
@@ -254,7 +254,11 @@ const formatContact = contact => {
     };
 
     // Get the name of the institution from the hostname of the last_url param
-    const institution = hs_analytics_last_url ? INSTITUTIONS[helpers.getHostName(hs_analytics_last_url.value)] : null;
+    const institution = hs_analytics_last_url ? INSTITUTIONS[helpers.getHostName(hs_analytics_last_url.value)] : hs_analytics_last_url;
+
+/*     const analytics_source = hs_analytics_source 
+        ? hs_analytics_source.value 
+        : null; */
 
     // Source Parameter
     let source = queryParams.utm_source;
@@ -262,11 +266,12 @@ const formatContact = contact => {
     // Setup the formatted contact output object
     formattedContact = {
       ...formattedContact,
+      /* analytics_source, */
       institution,
       utm_source: source,
       utm_campaign: queryParams.utm_campaign,
       hsa_grp: queryParams.hsa_grp || queryParams.ad_group,
-      utm_content: queryParams.utm_content
+      utm_content: queryParams.utm_content,
     };
 
     // Instagram exception
@@ -280,14 +285,16 @@ const formatContact = contact => {
 
     // Linkedin exceptions
     if (source === "linkedin") {
-      // if (first_conversion_event_name)
-      //   formattedContact.ad = first_conversion_event_name.value;
+      if (first_conversion_event_name)
+        formattedContact.ad = first_conversion_event_name.value;
 
-      if (hs_analytics_source_data_2)
-        formattedContact.utm_campaign = hs_analytics_source_data_2.value;
+     /*  if (hs_analytics_source_data_2)
+        formattedContact.utm_campaign = hs_analytics_source_data_2.value; */
+
+      /* if (hs_analytics_source)
+        formattedContact.analytics_rource = hs_analytics_source; */
     }
   }
-
   return formattedContact;
 };
 
